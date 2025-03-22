@@ -1,75 +1,65 @@
-# Nuxt Minimal Starter
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# TripPack
 
-## Setup
+TripPack là một ứng dụng web giúp bạn dễ dàng lập danh sách hành lý cho chuyến đi của mình. Với các tính năng như tạo checklist hành lý, chia sẻ mẫu checklist, tính toán chi phí hành lý và gợi ý trang phục theo thời tiết, TripPack sẽ giúp bạn chuẩn bị cho chuyến đi một cách dễ dàng và hiệu quả.
 
-Make sure to install dependencies:
+## Tính năng
 
-```bash
-# npm
-npm install
+- **Multi-step form**: Tạo danh sách hành lý theo các bước dễ dàng.
+- **Drag & Drop checklist**: Tổ chức hành lý bằng cách kéo và thả các mục trong danh sách.
+- **Chế độ sáng/tối (Dark/Light mode)**: Tùy chỉnh giao diện theo sở thích.
+- **Xuất PDF**: Xuất danh sách hành lý dưới dạng tệp PDF.
+- **Chia sẻ mẫu checklist**: Chia sẻ danh sách hành lý lên kho cộng đồng.
+- **Tính toán chi phí hành lý**: Đưa ra ước tính chi phí cho hành lý.
+- **Lịch trình chuyến đi chi tiết (Itinerary)**: Tạo lịch trình chuyến đi và quản lý thông tin.
+- **Chia sẻ nhiệm vụ nhóm**: Cộng tác và phân công nhiệm vụ cho các thành viên trong nhóm.
+- **Gợi ý trang phục theo thời tiết**: Đề xuất trang phục phù hợp với thời tiết nơi bạn đến.
 
-# pnpm
-pnpm install
+## Cài đặt
 
-# yarn
-yarn install
+### Yêu cầu
 
-# bun
-bun install
-```
+- Node.js v16 trở lên
+- NPM hoặc Yarn
 
-## Development Server
+### Cài đặt dự án
 
-Start the development server on `http://localhost:3000`:
+1. Clone repository về máy:
+   ```bash
+   git clone https://github.com/your-username/TripPack.git
+   ```
 
-```bash
-# npm
-npm run dev
+2. Cài đặt các gói phụ thuộc:
+   ```bash
+   npm install
+   ```
+   hoặc nếu bạn sử dụng Yarn:
+   ```bash
+   yarn install
+   ```
 
-# pnpm
-pnpm dev
+3. Chạy dự án:
+   ```bash
+   npm run dev
+   ```
+   hoặc:
+   ```bash
+   yarn dev
+   ```
 
-# yarn
-yarn dev
+4. Mở trình duyệt và truy cập `http://localhost:3000`.
 
-# bun
-bun run dev
-```
+## Công nghệ sử dụng
 
-## Production
+- **Frontend**: Nuxt 3
+- **UI Framework**: (Nếu có thể thêm framework UI mà bạn đang dùng)
+- **Backend**: (Nếu bạn có backend riêng cho dự án)
+- **Database**: (Nếu có sử dụng cơ sở dữ liệu)
 
-Build the application for production:
+## Cảm ơn
 
-```bash
-# npm
-npm run build
+Cảm ơn bạn đã sử dụng TripPack! Nếu bạn có bất kỳ câu hỏi hoặc đóng góp nào, đừng ngần ngại liên hệ với chúng tôi hoặc tạo issue trên GitHub.
 
-# pnpm
-pnpm build
+## License
 
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Dự án này được cấp phép theo [MIT License](LICENSE).
