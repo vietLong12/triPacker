@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-primary dark:text-secondary bg-slate-100  dark:bg-[#1D1E1F];
+  }
+}
+:root {
+  --el-color-primary: #0ea5e9;
+}
+
+.el-card {
+  @apply dark:!text-secondary-dark !text-primary;
+}

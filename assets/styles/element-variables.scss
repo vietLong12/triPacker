@@ -1,0 +1,15 @@
+/* assets/styles/element-variables.scss */
+@use "element-plus/theme-chalk/src/mixins/config.scss" as *;
+
+$--colors: (
+    'primary': #0ea5e9,
+    // màu chính (vd: blue-500)
+    'success': #22c55e,
+    // màu thành công (vd: green-500)
+    'warning': #facc15,
+    // màu cảnh báo (vd: yellow-400)
+    'danger': #ef4444,
+    // màu lỗi (vd: red-500)
+    'info': #64748b,
+    // màu thông tin (vd: slate-500)
+);
