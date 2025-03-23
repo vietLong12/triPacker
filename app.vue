@@ -14,9 +14,10 @@
 </template>
 
 <script setup>
+import { ElLoading } from "element-plus";
 import { ref, onMounted, watch } from "vue";
 
-const isDark = ref(true);
+const isDark = ref(false);
 
 // toggle + update html class
 const toggleDark = () => {

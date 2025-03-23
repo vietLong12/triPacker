@@ -1,120 +1,88 @@
 <template>
-  <header class="flex items-center justify-between h-[64px] mx-[20px]">
-    <!-- Logo + Title -->
-    <div class="flex items-center space-x-2">
-      <img
-        class="h-[44px]"
-        src="../public/logo/tripacker.png"
-        alt="TriPacker logo"
-      />
-      <el-text
-        class="font-bold !text-2xl !text-primary-light dark:!text-primary-dark"
-        >TriPacker</el-text
-      >
-    </div>
-
-    <!-- PC Menu -->
-    <el-menu
-      v-if="!isMobile"
-      class="hidden md:flex !border-none !bg-transparent"
-      @select="handleSelect"
+  <div>
+    <header
+      class="fixed-top top-0 z-30 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-sm dark:shadow dark:shadow-black/20"
     >
-      <el-menu-item
-        index="1"
-        class="!text-[16px] font-bold !text-primary-light dark:!text-primary-dark"
-        >Tính năng</el-menu-item
+      <div
+        class="flex items-center justify-between max-w-7xl mx-auto h-[72px] px-6 md:px-12"
       >
-      <el-menu-item
-        index="2"
-        class="!text-[16px] font-bold !text-primary-light dark:!text-primary-dark"
-        >Kho cộng đồng</el-menu-item
-      >
-      <el-menu-item
-        index="3"
-        class="!text-[16px] font-bold !text-primary-light dark:!text-primary-dark"
-        >Đánh giá</el-menu-item
-      >
-      <el-menu-item
-        index="4"
-        class="!text-[16px] font-bold !text-primary-light dark:!text-primary-dark"
-        >FAQ</el-menu-item
-      >
-      <el-menu-item
-        index="5"
-        class="!text-[16px] font-bold !text-primary-light dark:!text-primary-dark"
-        >Liên hệ</el-menu-item
-      >
-      <el-menu-item
-        index="6"
-        class="!text-[16px] font-bold !text-primary-light dark:!text-primary-dark"
-        >Đăng nhập</el-menu-item
-      >
-      <el-menu-item
-        index="7"
-        class="!text-[16px] font-bold !text-primary-light dark:!text-primary-dark"
-        >Đăng ký</el-menu-item
-      >
-    </el-menu>
+        <!-- Logo -->
+        <NuxtLink to="/" class="flex items-center space-x-3 group">
+          <img
+            class="h-[48px] object-contain transition-transform duration-300 group-hover:scale-105"
+            src="../public/logo/tripacker.png"
+            alt="TriPacker logo"
+          />
+          <span
+            class="font-extrabold text-2xl text-gray-900 dark:text-white group-hover:text-primary-light dark:group-hover:text-primary-dark transition-colors"
+          >
+            TriPacker
+          </span>
+        </NuxtLink>
 
-    <!-- Mobile hamburger -->
-    <el-button
-      class="md:hidden"
-      v-if="isMobile"
-      @click="drawer = true"
-      icon="Menu"
-      circle
-    />
+        <!-- PC Menu -->
+        <nav class="hidden md:flex gap-6 items-center">
+          <NuxtLink
+            v-for="(item, index) in menuItems"
+            :key="index"
+            :to="item.to"
+            class="text-[16px] font-semibold hover:text-primary-dark dark:hover:text-secondary-dark transition"
+          >
+            {{ item.label }}
+          </NuxtLink>
+        </nav>
 
-    <!-- Drawer mobile -->
+        <!-- Mobile hamburger -->
+        <div class="block md:hidden">
+          <el-button
+            class=""
+            @click="drawer = true"
+            :icon="Menu"
+            circle
+            type="primary"
+            plain
+          ></el-button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Drawer phải ở ngoài header -->
     <el-drawer
       v-model="drawer"
       direction="rtl"
-      size="220px"
+      size="240px"
       :with-header="false"
     >
-      <el-menu
-        :default-active="activeIndex"
-        mode="vertical"
-        @select="handleSelect"
-        background-color="transparent"
-        text-color="#1e293b"
-        active-text-color="#0ea5e9"
-      >
-        <el-menu-item index="1">Tính năng</el-menu-item>
-        <el-menu-item index="2">Kho cộng đồng</el-menu-item>
-        <el-menu-item index="3">Đánh giá</el-menu-item>
-        <el-menu-item index="4">FAQ</el-menu-item>
-        <el-menu-item index="5">Liên hệ</el-menu-item>
-      </el-menu>
+      <nav class="flex flex-col gap-4 mt-4 px-4">
+        <NuxtLink
+          v-for="(item, index) in mobileMenuItems"
+          :key="index"
+          :to="item.to"
+          class="text-[16px] font-medium text-gray-700 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition"
+          @click="drawer = false"
+        >
+          {{ item.label }}
+        </NuxtLink>
+      </nav>
     </el-drawer>
-  </header>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
+import { Menu } from "@element-plus/icons-vue";
 
 const drawer = ref(false);
-const activeIndex = ref("1");
-const isMobile = ref(false);
 
-const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
-  drawer.value = false; // tự đóng drawer khi click
-};
+const menuItems = [
+  { to: "#features", label: "Tính năng" },
+  { to: "#community", label: "Kho cộng đồng" },
+  { to: "#reviews", label: "Đánh giá" },
+  { to: "#faq", label: "FAQ" },
+  { to: "#contact", label: "Liên hệ" },
+  { to: "/login", label: "Đăng nhập" },
+  { to: "/register", label: "Đăng ký" },
+];
 
-onMounted(() => {
-  // Check màn hình mobile
-  const handleResize = () => {
-    isMobile.value = window.innerWidth < 768;
-  };
-  handleResize();
-  window.addEventListener("resize", handleResize);
-});
+const mobileMenuItems = menuItems.slice(0, 5);
 </script>
-
-<style scoped>
-/* Giữ nguyên margin auto cho logo */
-header .el-menu-item:first-child {
-  margin-right: auto;
-}
-</style>

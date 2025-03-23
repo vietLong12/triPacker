@@ -1,34 +1,5 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <!-- Navbar -->
-    <!-- <header class="flex justify-between items-center py-6 px-8 shadow-sm">
-      <div class="text-2xl font-bold text-indigo-600">
-        🎒 Packing List Maker
-      </div>
-      <nav class="space-x-6 hidden md:flex text-sm text-gray-700">
-        <a href="#features" class="hover:text-indigo-500">Tính năng</a>
-        <a href="#community" class="hover:text-indigo-500">Kho cộng đồng</a>
-        <a href="#testimonials" class="hover:text-indigo-500">Đánh giá</a>
-        <a href="#faq" class="hover:text-indigo-500">FAQ</a>
-        <a href="#contact" class="hover:text-indigo-500">Liên hệ</a>
-      </nav>
-      <div class="space-x-3 text-sm">
-        <button
-          class="px-4 py-1 rounded border text-indigo-600 hover:bg-indigo-50"
-        >
-          Đăng nhập
-        </button>
-        <button
-          class="px-4 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-700"
-        >
-          Đăng ký
-        </button>
-      </div>
-    </header> -->
-
-    <Headers />
-
-    <!-- Hero -->
     <section
       class="flex flex-col-reverse md:flex-row items-center px-8 bg-introduction mb-10 py-32"
     >
@@ -46,8 +17,20 @@
               Chia sẻ dễ dàng chỉ trong vài phút.
             </p>
             <div class="space-x-3 flex justify-center">
-              <el-button type="primary" size="large"> Bắt đầu ngay </el-button>
-              <el-button type="primary" size="large" plain>
+              <el-button
+                type="primary"
+                size="large"
+                @click="handleStart"
+                :loading="loadingNavigate"
+              >
+                Bắt đầu ngay
+              </el-button>
+              <el-button
+                type="primary"
+                size="large"
+                plain
+                @click="navigateTo('/templates')"
+              >
                 Xem mẫu thử
               </el-button>
             </div>
@@ -353,8 +336,11 @@
 </template>
 
 <script setup>
+import { ElLoading } from "element-plus";
 import Headers from "../components/Headers.vue";
 import { ChromeFilled } from "@element-plus/icons-vue";
+
+const loadingNavigate = ref(false);
 
 const faqs = [
   {
@@ -373,6 +359,13 @@ const faqs = [
       "Phiên bản cơ bản hoàn toàn miễn phí. Gói nâng cao sẽ có thêm các tính năng cộng tác và AI đề xuất thông minh.",
   },
 ];
+
+const handleStart = () => {
+  loadingNavigate.value = true;
+  setTimeout(() => {
+    navigateTo("/step1");
+  }, 1000);
+};
 </script>
 <style scoped>
 .bg-introduction {
