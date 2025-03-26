@@ -1,19 +1,12 @@
 <template>
-  <div
-    class="min-h-screen flex justify-center items-start py-12 px-4 relative overflow-hidden"
-  >
-    <div
-      class="absolute inset-0 bg-cover bg-bottom bg-no-repeat transition-all duration-500"
-      :style="{ backgroundImage: `url(${bgMap[bgImage]})` }"
-    >
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-blue-400/60 via-teal-400/50 to-green-300/40 backdrop-blur-sm"
-      ></div>
+  <div class="min-h-screen flex justify-center items-start py-12 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-bottom bg-no-repeat transition-all duration-500"
+      :style="{ backgroundImage: `url(${bgMap[bgImage]})` }">
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-400/60 via-teal-400/50 to-green-300/40 backdrop-blur-sm">
+      </div>
     </div>
 
-    <div
-      class="relative w-full max-w-4xl space-y-12 bg-white/80 dark:bg-black/80 p-8 rounded-xl shadow-2xl z-10"
-    >
+    <div class="relative w-full max-w-4xl space-y-12 bg-white/80 dark:bg-black/80 p-8 rounded-xl shadow-2xl z-10">
       <div class="flex items-center justify-between">
         <h2 class="text-3xl font-bold">Thông tin chuyến đi</h2>
         <el-button type="primary" :icon="Download" @click="importTemplate" />
@@ -33,7 +26,10 @@ import bgBusiness from "../assets/bg/bg-business.avif";
 import bgForest from "../assets/bg/bg-forest.avif";
 import bgFamily from "../assets/bg/bg-family.avif";
 import bgFestival from "../assets/bg/bg-festival.avif";
+import { useAppStore } from "~/store/appStore";
+import templateService from "~/services/templateService";
 
+const appStore = useAppStore();
 // Map tripType => background image
 const bgMap: Record<string, string> = {
   travel: bgSea,
@@ -48,9 +44,15 @@ const bgImage = ref("travel");
 const handleTripTypeChange = (value: string) => {
   console.log("Change trip type to:", value);
   bgImage.value = value;
+  appStore.bgImage = bgMap[value];
 };
 
 const importTemplate = () => {
   console.log("Import template");
 };
+
+onMounted(() => {
+  const res = templateService.getTypeTrip()
+  console.log('res: ', res);
+})
 </script>

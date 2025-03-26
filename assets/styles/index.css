@@ -1,16 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  body {
-    @apply text-primary dark:text-secondary bg-slate-100  dark:bg-[#1D1E1F];
-  }
-}
 :root {
   --el-color-primary: #0ea5e9;
 }
 
-.el-card {
-  @apply dark:!text-secondary-dark !text-primary;
+body {
+  font-family: "Quicksand", sans-serif !important;
+  background-image: url("../bg-main.avif");
+  background-repeat: no-repeat; /* Không lặp lại */
+  background-position: center center; /* Căn giữa */
+  background-size: cover; /* Phủ kín toàn bộ màn hình */
+  background-attachment: fixed; /* Giữ ảnh cố định khi cuộn trang */
 }
+
+/* .el-card {
+  @apply dark:!text-secondary-dark !text-primary;
+} */

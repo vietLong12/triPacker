@@ -31,7 +31,7 @@ TripPack là một ứng dụng web giúp bạn dễ dàng lập danh sách hàn
 
 2. Cài đặt các gói phụ thuộc:
    ```bash
-   npm install
+   pnpm install
    ```
    hoặc nếu bạn sử dụng Yarn:
    ```bash
@@ -40,7 +40,7 @@ TripPack là một ứng dụng web giúp bạn dễ dàng lập danh sách hàn
 
 3. Chạy dự án:
    ```bash
-   npm run dev
+   pnpm run dev
    ```
    hoặc:
    ```bash
@@ -52,9 +52,9 @@ TripPack là một ứng dụng web giúp bạn dễ dàng lập danh sách hàn
 ## Công nghệ sử dụng
 
 - **Frontend**: Nuxt 3
-- **UI Framework**: (Nếu có thể thêm framework UI mà bạn đang dùng)
-- **Backend**: (Nếu bạn có backend riêng cho dự án)
-- **Database**: (Nếu có sử dụng cơ sở dữ liệu)
+- **UI Framework**: Element Plus
+- **Backend**: ExpressJS
+- **Database**: MongoDB
 
 ## Cảm ơn
 

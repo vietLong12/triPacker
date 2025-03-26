@@ -34,9 +34,6 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
-      textColor: {
-        DEFAULT: '#0ea5e9'
-      }
     },
   },
   plugins: [],

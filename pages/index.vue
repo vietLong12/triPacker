@@ -1,13 +1,11 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <section
-      class="flex flex-col-reverse md:flex-row items-center px-8 bg-introduction mb-10 py-32"
-    >
+    <section class="flex flex-col-reverse md:flex-row items-center px-8 bg-introduction mb-10 py-32">
       <el-row class="w-full">
         <el-col :span="12"></el-col>
         <el-col :span="12">
           <div class="flex-1 space-y-6">
-            <h1 class="text-4xl font-bold text-primary text-center">
+            <h1 class="text-4xl font-bold text-primary  text-center">
               Công cụ lập danh sách hành lý <br />
               Tối ưu cho mọi chuyến đi
             </h1>
@@ -17,20 +15,10 @@
               Chia sẻ dễ dàng chỉ trong vài phút.
             </p>
             <div class="space-x-3 flex justify-center">
-              <el-button
-                type="primary"
-                size="large"
-                @click="handleStart"
-                :loading="loadingNavigate"
-              >
+              <el-button type="primary" size="large" @click="handleStart" :loading="loadingNavigate">
                 Bắt đầu ngay
               </el-button>
-              <el-button
-                type="primary"
-                size="large"
-                plain
-                @click="navigateTo('/templates')"
-              >
+              <el-button type="primary" size="large" plain @click="navigateTo('/templates')">
                 Xem mẫu thử
               </el-button>
             </div>
@@ -47,8 +35,7 @@
         <!-- Row 1: 3 card -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <el-card
-            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500"
-          >
+            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500">
             <h3 class="font-semibold text-lg mb-2">Checklist tự động</h3>
             <p class="text-sm">
               Gợi ý danh sách hành lý dựa trên điểm đến, thời tiết và thời gian
@@ -57,8 +44,7 @@
           </el-card>
 
           <el-card
-            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500"
-          >
+            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500">
             <h3 class="font-semibold text-lg mb-2">
               Cá nhân hóa & Lưu template
             </h3>
@@ -69,8 +55,7 @@
           </el-card>
 
           <el-card
-            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500"
-          >
+            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500">
             <h3 class="font-semibold text-lg mb-2">Gợi ý thông minh</h3>
             <p class="text-sm">
               Đưa ra các lời khuyên đóng gói theo mùa, phong cách du lịch và các
@@ -82,8 +67,7 @@
         <!-- Row 2: 2 card nằm giữa -->
         <div class="flex flex-col md:flex-row md:justify-center gap-6 mt-6">
           <el-card
-            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500"
-          >
+            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500">
             <h3 class="font-semibold text-lg mb-2">Chia sẻ & Cộng tác</h3>
             <p class="text-sm">
               Chia sẻ checklist với bạn đồng hành hoặc nhóm, cùng nhau chuẩn bị
@@ -92,8 +76,7 @@
           </el-card>
 
           <el-card
-            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500"
-          >
+            class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500">
             <h3 class="font-semibold text-lg mb-2">Đồng bộ & Xuất file</h3>
             <p class="text-sm">
               Đồng bộ checklist trên nhiều thiết bị và xuất ra file PDF hoặc
@@ -115,9 +98,7 @@
         cũng có thể đóng góp checklist của mình vào kho chia sẻ!
       </p>
       <div class="flex justify-center gap-4 flex-wrap">
-        <div
-          class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition"
-        >
+        <div class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition">
           <h4 class="font-semibold text-indigo-600">Template: Du lịch biển</h4>
           <p class="text-xs text-gray-600">
             Checklist phù hợp cho các chuyến đi biển vào mùa hè.
@@ -126,9 +107,7 @@
             Tải về
           </button>
         </div>
-        <div
-          class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition"
-        >
+        <div class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition">
           <h4 class="font-semibold text-indigo-600">
             Template: Công tác 3 ngày
           </h4>
@@ -139,9 +118,7 @@
             Tải về
           </button>
         </div>
-        <div
-          class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition"
-        >
+        <div class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition">
           <h4 class="font-semibold text-indigo-600">Template: Trekking núi</h4>
           <p class="text-xs text-gray-600">
             Đầy đủ các vật dụng cần thiết cho hành trình khám phá thiên nhiên.
@@ -164,64 +141,37 @@
         Người dùng nói gì?
       </h2>
       <div class="flex flex-col md:flex-row justify-center gap-6">
-        <el-card
-          class="border rounded-xl p-6 shadow-lg space-y-4 max-w-xs text-center transition-colors duration-500"
-        >
-          <p
-            class="text-xl italic leading-relaxed text-primary-light dark:text-primary-dark"
-          >
+        <el-card class="border rounded-xl p-6 shadow-lg space-y-4 max-w-xs text-center transition-colors duration-500">
+          <p class="text-xl italic leading-relaxed text-primary-light dark:text-primary-dark">
             "Ứng dụng giúp tôi không còn quên đồ mỗi lần đi du lịch! Trải nghiệm
             rất mượt và dễ dùng."
           </p>
-          <el-avatar
-            shape="square"
-            :size="120"
-            fit="cover"
-            class="mx-auto rounded-lg my-2"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0mgwyiwU4ROueXVLWmXaU5V87HnIqau_y-w&s"
-          />
+          <el-avatar shape="square" :size="120" fit="cover" class="mx-auto rounded-lg my-2"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0mgwyiwU4ROueXVLWmXaU5V87HnIqau_y-w&s" />
           <div class="font-semibold text-primary dark:text-secondary">
             Minh Anh
           </div>
           <div class="text-sm text-primary dark:text-secondary">Freelancer</div>
         </el-card>
-        <el-card
-          class="border rounded-xl p-6 shadow-lg space-y-4 max-w-xs text-center transition-colors duration-500"
-        >
-          <p
-            class="text-xl italic leading-relaxed text-primary-light dark:text-primary-dark"
-          >
+        <el-card class="border rounded-xl p-6 shadow-lg space-y-4 max-w-xs text-center transition-colors duration-500">
+          <p class="text-xl italic leading-relaxed text-primary-light dark:text-primary-dark">
             "Ứng dụng giúp tôi không còn quên đồ mỗi lần đi du lịch! Trải nghiệm
             rất mượt và dễ dùng."
           </p>
-          <el-avatar
-            shape="square"
-            :size="120"
-            fit="cover"
-            class="mx-auto rounded-lg my-2"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0mgwyiwU4ROueXVLWmXaU5V87HnIqau_y-w&s"
-          />
+          <el-avatar shape="square" :size="120" fit="cover" class="mx-auto rounded-lg my-2"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0mgwyiwU4ROueXVLWmXaU5V87HnIqau_y-w&s" />
           <div class="font-semibold text-primary dark:text-secondary">
             Minh Anh
           </div>
           <div class="text-sm text-primary dark:text-secondary">Freelancer</div>
         </el-card>
-        <el-card
-          class="border rounded-xl p-6 shadow-lg space-y-4 max-w-xs text-center transition-colors duration-500"
-        >
-          <p
-            class="text-xl italic leading-relaxed text-primary-light dark:text-primary-dark"
-          >
+        <el-card class="border rounded-xl p-6 shadow-lg space-y-4 max-w-xs text-center transition-colors duration-500">
+          <p class="text-xl italic leading-relaxed text-primary-light dark:text-primary-dark">
             "Ứng dụng giúp tôi không còn quên đồ mỗi lần đi du lịch! Trải nghiệm
             rất mượt và dễ dùng."
           </p>
-          <el-avatar
-            shape="square"
-            :size="120"
-            fit="cover"
-            class="mx-auto rounded-lg my-2"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0mgwyiwU4ROueXVLWmXaU5V87HnIqau_y-w&s"
-          />
+          <el-avatar shape="square" :size="120" fit="cover" class="mx-auto rounded-lg my-2"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0mgwyiwU4ROueXVLWmXaU5V87HnIqau_y-w&s" />
           <div class="font-semibold text-primary dark:text-secondary">
             Minh Anh
           </div>
@@ -236,11 +186,8 @@
         Câu hỏi thường gặp
       </h2>
       <div class="max-w-3xl mx-auto space-y-6">
-        <el-card
-          v-for="(faq, index) in faqs"
-          :key="index"
-          class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500"
-        >
+        <el-card v-for="(faq, index) in faqs" :key="index"
+          class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500">
           <h4 class="font-semibold text-lg mb-2">
             {{ faq.question }}
           </h4>
@@ -253,10 +200,8 @@
 
     <!-- Contact & CTA -->
     <!-- Call to Action Section -->
-    <section
-      id="cta"
-      class="py-20 bg-indigo-600 dark:bg-background-dark dark:text-secondary-dark text-white text-center space-y-6 transition-colors duration-500"
-    >
+    <section id="cta"
+      class="py-20 bg-indigo-600 dark:bg-background-dark dark:text-secondary-dark text-white text-center space-y-6 transition-colors duration-500">
       <h2 class="text-3xl md:text-4xl font-bold uppercase">
         Sẵn sàng cho chuyến đi tiếp theo?
       </h2>
@@ -276,15 +221,8 @@
         <!-- About -->
         <div>
           <div class="flex items-center space-x-2 mb-4">
-            <img
-              class="h-[44px]"
-              src="../public/logo/tripacker.png"
-              alt="TriPacker logo"
-            />
-            <el-text
-              class="font-bold !text-2xl !text-primary-light dark:!text-primary-dark"
-              >TriPacker</el-text
-            >
+            <img class="h-[44px]" src="../public/logo/tripacker.png" alt="TriPacker logo" />
+            <el-text class="font-bold !text-2xl !text-primary-light dark:!text-primary-dark">TriPacker</el-text>
           </div>
           <p class="text-sm">
             Ứng dụng hỗ trợ lập danh sách hành lý thông minh cho mọi chuyến đi,
@@ -319,10 +257,18 @@
         <div>
           <h4 class="font-semibold mb-3">Mạng xã hội</h4>
           <div class="flex space-x-4 text-xl">
-            <el-icon class="cursor-pointer"><ChromeFilled /></el-icon>
-            <el-icon class="cursor-pointer"><ChromeFilled /></el-icon>
-            <el-icon class="cursor-pointer"><ChromeFilled /></el-icon>
-            <el-icon class="cursor-pointer"><ChromeFilled /></el-icon>
+            <el-icon class="cursor-pointer">
+              <ChromeFilled />
+            </el-icon>
+            <el-icon class="cursor-pointer">
+              <ChromeFilled />
+            </el-icon>
+            <el-icon class="cursor-pointer">
+              <ChromeFilled />
+            </el-icon>
+            <el-icon class="cursor-pointer">
+              <ChromeFilled />
+            </el-icon>
           </div>
         </div>
       </div>
@@ -370,7 +316,7 @@ const handleStart = () => {
 <style scoped>
 .bg-introduction {
   position: relative;
-  background-image: url("../assets/bg-intro-3.jpg");
+  background-image: url("../assets/bg/photo-1501446529957-6226bd447c46.avif");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -380,10 +326,12 @@ const handleStart = () => {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0); /* chỉnh độ mờ */
+  background: rgba(0, 0, 0, 0.5);
+  /* chỉnh độ mờ */
   z-index: 1;
 }
-.bg-introduction > * {
+
+.bg-introduction>* {
   position: relative;
   z-index: 2;
 }
