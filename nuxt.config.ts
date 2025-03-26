@@ -2,11 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  modules: [
-    "@nuxtjs/tailwindcss", 
-    "unplugin-icons/nuxt",
-    "@vite-pwa/nuxt" // ✅ Thêm module PWA
-  ],
+  modules: ["@nuxtjs/tailwindcss", "unplugin-icons/nuxt"],
   css: ["~/assets/styles/index.css"],
   runtimeConfig: {
     public: {
@@ -14,7 +10,8 @@ export default defineNuxtConfig({
         process.env.NUXT_PUBLIC_API_BASE || "http://localhost:8000/v1/api",
     },
   },
-  pwa: { // ✅ Cấu hình PWA
+  pwa: {
+    // ✅ Cấu hình PWA
     manifest: {
       name: "TriPacker",
       short_name: "TriPacker",
@@ -26,14 +23,14 @@ export default defineNuxtConfig({
         {
           src: "/icon-192x192.png",
           sizes: "192x192",
-          type: "image/png"
+          type: "image/png",
         },
         {
           src: "/icon-512x512.png",
           sizes: "512x512",
-          type: "image/png"
-        }
-      ]
+          type: "image/png",
+        },
+      ],
     },
     workbox: {
       runtimeCaching: [
@@ -41,8 +38,8 @@ export default defineNuxtConfig({
           urlPattern: /^https:\/\/api\.yourbackend\.com\//,
           handler: "NetworkFirst",
           method: "GET",
-        }
-      ]
-    }
-  }
+        },
+      ],
+    },
+  },
 });

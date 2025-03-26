@@ -1,13 +1,13 @@
 <template>
   <div>
-    <header class="fixed-top top-0 z-30   backdrop-blur-lg shadow-sm dark:shadow dark:shadow-black/20">
+    <header class=" z-30   backdrop-blur-lg bg-yellow-50 shadow-sm dark:shadow dark:shadow-black/20 dark:bg-[#0A0A0A]">
       <div class="flex items-center justify-between max-w-7xl mx-auto h-[72px] px-6 md:px-12">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center space-x-3 group">
           <img class="h-[48px] object-contain transition-transform duration-300 group-hover:scale-105"
             src="../public/logo/tripacker.png" alt="TriPacker logo" />
           <span
-            class="font-extrabold text-2xl text-primary dark:text-secondary group-hover:text-primary-light dark:group-hover:text-primary-dark transition-colors">
+            class="font-extrabold text-2xl  group-hover:text-primary-light dark:group-hover:text-secondary-dark transition-colors">
             TriPacker
           </span>
         </NuxtLink>

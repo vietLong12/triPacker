@@ -1,45 +1,127 @@
-<script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-const username = ref("");
-const password = ref("");
-const loading = ref(false);
-
-const login = () => {
-    if (!username.value || !password.value) {
-        return ElMessage.error("Vui lòng nhập đầy đủ thông tin!");
-    }
-
-    loading.value = true;
-
-    setTimeout(() => {
-        loading.value = false;
-        ElMessage.success("Đăng nhập thành công!");
-        router.push("/dashboard"); // Điều hướng sau khi đăng nhập
-    }, 1500);
-};
-</script>
-
 <template>
-    <div class="flex items-center justify-center h-screen">
-        <el-card class="w-96 p-5 shadow-md">
-            <h2 class="text-2xl font-semibold text-center mb-4">Đăng Nhập</h2>
+    <div class="flex items-center justify-center my-32 mx-4">
+        <el-card class="w-[400px] p-6 shadow-lg rounded-lg">
+            <h2 class="text-2xl font-semibold text-center mb-6 text-gray-700 dark:text-gray-200">
+                Đăng nhập
+            </h2>
 
-            <el-form @submit.prevent="login">
-                <el-form-item label="Tên đăng nhập">
-                    <el-input v-model="username" placeholder="Nhập username" clearable />
+            <el-form ref="loginFormRef" :model="form" :rules="rules" @submit.prevent="handleLogin">
+                <el-form-item prop="username">
+                    <el-input v-model="form.email" placeholder="Email" clearable>
+                        <template #prefix>
+                            <el-icon>
+                                <User />
+                            </el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
 
-                <el-form-item label="Mật khẩu">
-                    <el-input v-model="password" type="password" placeholder="Nhập mật khẩu" clearable show-password />
+                <el-form-item prop="password">
+                    <el-input v-model="form.password" type="password" placeholder="********" show-password clearable>
+                        <template #prefix>
+                            <el-icon>
+                                <Lock />
+                            </el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
 
-                <el-button type="primary" class="w-full" :loading="loading" @click="login">
-                    Đăng Nhập
+                <el-form-item>
+                    <el-checkbox v-model="form.remember">Ghi nhớ tôi</el-checkbox>
+                </el-form-item>
+                <el-form-item>
+                    <router-link to="/forgot-password" class="text-sm !block text-blue-500 float-right hover:underline">
+                        Quên mật khẩu?
+                    </router-link>
+                </el-form-item>
+
+                <el-button type="primary" class="w-full" :loading="loading" native-type="submit">
+                    Đăng nhập
                 </el-button>
             </el-form>
+
+            <div class="mt-4 text-center text-gray-600 dark:text-gray-400">
+                <p>Đăng nhập với tài khoản mạng xã hội</p>
+                <div class="flex justify-center mt-3">
+                    <el-button class="social-btn facebook">
+                        <svg-icon type="mdi" :path="mdiFacebook" class="w-4 h-4 mr-2"></svg-icon> Facebook
+                    </el-button>
+                    <el-button class="social-btn google">
+                        <svg-icon type="mdi" :path="mdiGoogle" class="w-4 h-4 mr-2"></svg-icon> Google+
+                    </el-button>
+                </div>
+            </div>
+
+            <div class="text-center mt-6 text-sm">
+                <p>Bạn không có tài khoản?
+                    <router-link to="/register" class="text-red-500 hover:underline">Đăng ký ngay!</router-link>
+                </p>
+                <el-button class="w-full mt-2 register-btn">REGISTER</el-button>
+            </div>
         </el-card>
     </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { ElMessage } from "element-plus";
+import { User, Lock } from "@element-plus/icons-vue";
+import type { FormInstance } from "element-plus";
+import { mdiFacebook, mdiGoogle } from "@mdi/js";
+import SvgIcon from "@jamescoyle/vue-icon";
+const router = useRouter();
+const loading = ref(false);
+const loginFormRef = ref<FormInstance | null>(null);
+
+const form = ref({
+    email: "",
+    password: "",
+    remember: false,
+});
+
+const rules = {
+    username: [{ required: true, message: "Vui lòng nhập email", trigger: "blur" }],
+    password: [{ required: true, message: "Vui lòng nhập mật khẩu", trigger: "blur" }],
+};
+
+const handleLogin = () => {
+    if (!loginFormRef.value) return;
+
+    loginFormRef.value.validate((valid) => {
+        if (valid) {
+            loading.value = true;
+            setTimeout(() => {
+                loading.value = false;
+                ElMessage.success("Đăng nhập thành công!");
+                console.log(form.value)
+            }, 1500);
+        }
+    });
+};
+</script>
+
+<style scoped>
+.social-btn {
+    width: 120px;
+    color: white;
+    border-radius: 4px;
+}
+
+.twitter {
+    background-color: #1da1f2;
+}
+
+.facebook {
+    background-color: #1877f2;
+}
+
+.google {
+    background-color: #db4437;
+}
+
+.register-btn {
+    background-color: #00c09d;
+    color: white;
+}
+</style>

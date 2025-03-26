@@ -1,0 +1,35 @@
+# Ignore node_modules và cache
+node_modules
+.pnpm
+.pnp
+.npm
+.yarn
+.yarn-cache
+.vscode
+.idea
+
+# Ignore output và build files
+.nuxt
+.output
+dist
+coverage
+
+# Ignore hệ thống và config
+.DS_Store
+Thumbs.db
+*.log
+*.lock
+yarn.lock
+package-lock.json
+
+# Ignore môi trường và key
+.env
+.env.local
+.env.*.local
+capacitor.config.ts
+android
+ios
+
+# Ignore Git
+.git
+.gitignore

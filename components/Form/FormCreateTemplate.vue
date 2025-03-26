@@ -5,13 +5,10 @@
       <h3 class="text-xl font-semibold">Kiểu chuyến đi</h3>
       <el-form-item prop="tripType">
         <el-select v-model="form.tripType" placeholder="Chọn kiểu chuyến đi" class="w-full">
-          <el-option label="Du lịch" value="travel" />
-          <el-option label="Công tác" value="business" />
-          <el-option label="Phiêu lưu" value="adventure" />
-          <el-option label="Gia đình" value="family" />
-          <el-option label="Khác" value="other" />
+          <el-option v-for="trip in listTypeTrip" :key="trip._id" :label="trip.name" :value="trip.name" />
         </el-select>
       </el-form-item>
+
     </div>
 
     <!-- Block 2: Thông tin cơ bản -->
@@ -80,12 +77,12 @@
       <div v-for="(member, index) in form.members" :key="index" class="border p-4 rounded-lg relative">
         <el-row :gutter="20" class="items-center">
           <el-col :span="11">
-            <el-form-item :label="`Thành viên ${index + 1} - Tên`" class="mb-0">
+            <el-form-item :label="`Thành viên ${index + 1} - Tên: ${member.name}`" class="mb-0">
               <el-input v-model="member.name" placeholder="Nhập tên thành viên" />
             </el-form-item>
           </el-col>
           <el-col :span="11">
-            <el-form-item label="Email" class="mb-0">
+            <el-form-item :label="`Email: ${member.email}`" class="mb-0">
               <el-input v-model="member.email" placeholder="Nhập email thành viên" />
             </el-form-item>
           </el-col>
@@ -103,13 +100,10 @@
       <el-collapse-item name="advanced" title="Tùy chọn nâng cao">
         <el-form-item label="Loại phương tiện di chuyển">
           <el-select v-model="form.vehicle" placeholder="Chọn loại phương tiện di chuyển" class="w-full">
-            <el-option label="Xe máy" value="Xe máy" />
-            <el-option label="Ô tô" value="Ô tô" />
-            <el-option label="Xe khách" value="Xe khách" />
-            <el-option label="Máy bay" value="Máy bay" />
-            <el-option label="Tàu hỏa" value="Tàu hỏa" />
+            <el-option v-for="(vehicle, index) in vehicleOptions" :key="index" :label="vehicle" :value="vehicle" />
           </el-select>
         </el-form-item>
+
         <el-form-item label="Ghi chú sức khỏe / hạn chế (nếu có)">
           <el-input v-model="form.healthNotes" type="textarea" rows="3" placeholder="Ghi chú sức khỏe">
           </el-input>
@@ -132,11 +126,21 @@ import { ref, computed, watch } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+import type { TypeTrip } from "~/types/response";
+import type { PropType } from "vue"; // Import PropType để hỗ trợ TypeScript
 
 interface Member {
   name: string;
   email: string;
 }
+
+
+const props = defineProps({
+  listTypeTrip: {
+    type: Array as PropType<TypeTrip[]>,
+    default: () => [],
+  },
+});
 
 const router = useRouter();
 const emit = defineEmits(["update:tripType"]);
@@ -144,7 +148,7 @@ const formRef = ref<FormInstance | null>(null);
 const activeCollapse = ref<string[]>([]);
 
 const form = ref({
-  tripType: "travel",
+  tripType: "Du Lịch",
   destination: "",
   startDate: "",
   endDate: "",
@@ -238,6 +242,7 @@ const submitForm = async (formEl: FormInstance | null) => {
       loadingContinue.value = true;
       console.log("submit!", form.value);
     } else {
+      ElMessage.warning(fields?.destination[0].message)
       console.log("error submit!", fields);
     }
   });

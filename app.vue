@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :theme="{ dark: isDark }">
-    <div class="min-h-screen transition-colors duration-500">
+    <div class="transition-colors duration-500">
       <NuxtLayout />
       <NuxtPage />
       <button

@@ -4,12 +4,44 @@
       <el-row class="w-full">
         <el-col :span="12"></el-col>
         <el-col :span="12">
-          <div class="flex-1 space-y-6">
-            <h1 class="text-4xl font-bold text-primary  text-center">
-              Công cụ lập danh sách hành lý <br />
-              Tối ưu cho mọi chuyến đi
+          <div
+            class="relative flex-1 mx-auto space-y-6 p-8 rounded-2xl bg-white/10 dark:bg-black/50 shadow-lg backdrop-blur-lg w-[85%]">
+            <h1
+              class="text-4xl font-bold dark:text-primary text-yellow-50 text-center text-shadow-md flex justify-center gap-x-1">
+              <span class="bounce">C</span>
+              <span class="bounce">ô</span>
+              <span class="bounce">n</span>
+              <span class="bounce">g</span>
+              <span class="mr-1"></span>
+              <span class="bounce">c</span>
+              <span class="bounce">ụ</span>
+              <span class="mr-1"></span>
+              <span class="bounce">l</span>
+              <span class="bounce">ậ</span>
+              <span class="bounce">p</span>
+              <span class="mr-1"></span>
+              <br>
+              <span class="bounce">d</span>
+              <span class="bounce">a</span>
+              <span class="bounce">n</span>
+              <span class="bounce">h</span>
+              <span class="mr-1"></span>
+              <span class="bounce">s</span>
+              <span class="bounce">á</span>
+              <span class="bounce">c</span>
+              <span class="bounce">h</span>
+              <span class="mr-1"></span>
+              <span class="bounce">h</span>
+              <span class="bounce">à</span>
+              <span class="bounce">n</span>
+              <span class="bounce">h</span>
+              <span class="mr-1"></span>
+              <span class="bounce">l</span>
+              <span class="bounce">ý</span>
             </h1>
-            <p class="text-primary text-xl text-center">
+
+
+            <p class=" text-xl text-center dark:text-primary text-yellow-50">
               Tạo checklist đóng gói thông minh <br />
               Cá nhân hóa <br />
               Chia sẻ dễ dàng chỉ trong vài phút.
@@ -23,14 +55,17 @@
               </el-button>
             </div>
           </div>
+
         </el-col>
       </el-row>
     </section>
     <!-- Features -->
     <section id="features" class="px-8 py-10 space-y-10 mb-4">
-      <h2 class="text-center text-3xl font-bold uppercase">
-        Tính năng nổi bật
-      </h2>
+      <div class="block bg-white/30 dark:bg-black/30 px-6 py-2 rounded-lg backdrop-blur-md w-fit mx-auto">
+        <h2 class="text-4xl font-bold text-black dark:text-white uppercase">
+          Tính năng nổi bật
+        </h2>
+      </div>
       <div class="grid gap-6">
         <!-- Row 1: 3 card -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -90,9 +125,11 @@
 
     <!-- Community Templates -->
     <section id="community" class="px-8 py-14 my-10 space-y-6">
-      <h2 class="text-center text-3xl font-bold uppercase">
-        Kho cộng đồng & Chia sẻ template
-      </h2>
+      <div class="block bg-white/30 dark:bg-black/30 px-6 py-2 rounded-lg backdrop-blur-md w-fit mx-auto">
+        <h2 class="text-4xl font-bold text-black dark:text-white">
+          KHO CỘNG ĐỒNG & CHIA SẺ TEMPLATE
+        </h2>
+      </div>
       <p class="text-center text-sm max-w-2xl mx-auto">
         Tham khảo và tải về hàng trăm checklist được chia sẻ bởi cộng đồng. Bạn
         cũng có thể đóng góp checklist của mình vào kho chia sẻ!
@@ -137,9 +174,11 @@
     <hr class="mx-32" />
     <!-- Testimonials -->
     <section id="testimonials" class="px-8 py-14 space-y-8">
-      <h2 class="text-center text-3xl uppercase font-bold">
-        Người dùng nói gì?
-      </h2>
+      <div class="block bg-white/30 dark:bg-black/30 px-6 py-2 rounded-lg backdrop-blur-md w-fit mx-auto">
+        <h2 class="text-4xl font-bold text-black dark:text-white uppercase">
+          Người dùng nói gì
+        </h2>
+      </div>
       <div class="flex flex-col md:flex-row justify-center gap-6">
         <el-card class="border rounded-xl p-6 shadow-lg space-y-4 max-w-xs text-center transition-colors duration-500">
           <p class="text-xl italic leading-relaxed text-primary-light dark:text-primary-dark">
@@ -182,9 +221,11 @@
     <hr class="mx-32" />
     <!-- FAQ -->
     <section id="faq" class="px-8 py-14 space-y-6">
-      <h2 class="text-center text-3xl font-bold uppercase">
-        Câu hỏi thường gặp
-      </h2>
+      <div class="block bg-white/30 dark:bg-black/30 px-6 py-2 rounded-lg backdrop-blur-md w-fit mx-auto">
+        <h2 class="text-4xl font-bold text-black dark:text-white">
+          CÂU HỎI THƯỜNG GẶP
+        </h2>
+      </div>
       <div class="max-w-3xl mx-auto space-y-6">
         <el-card v-for="(faq, index) in faqs" :key="index"
           class="bg-white border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-colors duration-500">
@@ -201,7 +242,7 @@
     <!-- Contact & CTA -->
     <!-- Call to Action Section -->
     <section id="cta"
-      class="py-20 bg-indigo-600 dark:bg-background-dark dark:text-secondary-dark text-white text-center space-y-6 transition-colors duration-500">
+      class="py-20 bg-indigo-300 dark:bg-background-dark dark:text-secondary-dark text-white text-center space-y-6 transition-colors duration-500">
       <h2 class="text-3xl md:text-4xl font-bold uppercase">
         Sẵn sàng cho chuyến đi tiếp theo?
       </h2>
@@ -216,13 +257,13 @@
     </section>
 
     <!-- Contact & Footer -->
-    <footer class="py-12">
+    <footer class="py-12 bg-primary text-white dark:bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- About -->
         <div>
-          <div class="flex items-center space-x-2 mb-4">
+          <div class="flex items-center space-x-2 mb-4 cursor-pointer w-fit">
             <img class="h-[44px]" src="../public/logo/tripacker.png" alt="TriPacker logo" />
-            <el-text class="font-bold !text-2xl !text-primary-light dark:!text-primary-dark">TriPacker</el-text>
+            <p class="font-bold !text-2xl">TriPacker</p>
           </div>
           <p class="text-sm">
             Ứng dụng hỗ trợ lập danh sách hành lý thông minh cho mọi chuyến đi,
@@ -320,13 +361,15 @@ const handleStart = () => {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* Bóng đổ đậm */
 }
 
 .bg-introduction::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.1);
   /* chỉnh độ mờ */
   z-index: 1;
 }
@@ -334,5 +377,105 @@ const handleStart = () => {
 .bg-introduction>* {
   position: relative;
   z-index: 2;
+}
+
+@keyframes bounceWave {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bounce {
+  display: inline-block;
+  animation: bounceWave 2s infinite ease-in-out;
+  margin-right: 4px;
+  /* Tạo khoảng cách giữa các chữ */
+}
+
+/* Delay hiệu ứng theo từng chữ */
+.bounce:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.bounce:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.bounce:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.bounce:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.bounce:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.bounce:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+.bounce:nth-child(7) {
+  animation-delay: 0.6s;
+}
+
+.bounce:nth-child(8) {
+  animation-delay: 0.7s;
+}
+
+.bounce:nth-child(9) {
+  animation-delay: 0.8s;
+}
+
+.bounce:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+.bounce:nth-child(11) {
+  animation-delay: 1s;
+}
+
+.bounce:nth-child(12) {
+  animation-delay: 1.1s;
+}
+
+.bounce:nth-child(13) {
+  animation-delay: 1.2s;
+}
+
+.bounce:nth-child(14) {
+  animation-delay: 1.3s;
+}
+
+.bounce:nth-child(15) {
+  animation-delay: 1.4s;
+}
+
+.bounce:nth-child(16) {
+  animation-delay: 1.5s;
+}
+
+.bounce:nth-child(17) {
+  animation-delay: 1.6s;
+}
+
+.bounce:nth-child(18) {
+  animation-delay: 1.7s;
+}
+
+.bounce:nth-child(19) {
+  animation-delay: 1.8s;
+}
+
+.bounce:nth-child(20) {
+  animation-delay: 1.9s;
 }
 </style>
