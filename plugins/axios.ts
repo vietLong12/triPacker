@@ -7,13 +7,14 @@ export default defineNuxtPlugin((nuxtApp) => {
   const api = axios.create({
     baseURL: config.public.apiBase, // ✅ Lấy API base từ runtimeConfig
     timeout: 10000, // 10 giây
+    withCredentials: true,
     headers: { "Content-Type": "application/json" },
   });
 
   // Interceptors (tuỳ chọn)
   api.interceptors.request.use(
     (config) => {
-      console.log("🔄 Request:", config);
+      // console.log("🔄 Request:", config);
       return config;
     },
     (error) => {

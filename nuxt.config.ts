@@ -1,9 +1,20 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from "nuxt/config";
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "unplugin-icons/nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "unplugin-icons/nuxt", "@nuxtjs/i18n"],
   css: ["~/assets/styles/index.css"],
+  i18n: {
+    locales: [
+      { code: "en", name: "English", file: "en.json" },
+      { code: "vi", name: "Tiếng Việt", file: "vi.json" },
+    ],
+    lazy: true, // Load file JSON khi cần
+    langDir: "locales/", // Thư mục chứa file ngôn ngữ
+    defaultLocale: "vi",
+    vueI18n: "./i18n.config", // Không có .ts
+  },
   runtimeConfig: {
     public: {
       apiBase:

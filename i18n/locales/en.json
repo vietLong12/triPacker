@@ -1,0 +1,66 @@
+{
+    "errors": {
+        "auth": {
+            "default": "An error occurred. Please try again later.",
+            "AUTH-001": "Please provide all required information: name, email, and password.",
+            "AUTH-002": "Name must not contain spaces.",
+            "AUTH-003": "Account has been created but not verified yet. Please check your email.",
+            "AUTH-004": "A new verification email has been sent.",
+            "AUTH-005": "Account created successfully. Please check your email for verification.",
+            "AUTH-006": "Email already in use.",
+            "AUTH-007": "Both identifier and password are required.",
+            "AUTH-008": "Identifier or Password is incorrect.",
+            "AUTH-009": "Account has not been verified.",
+            "AUTH-010": "Account has been disabled. Please contact the admin.",
+            "AUTH-011": "Your account has been successfully verified!",
+            "AUTH-012": "Logged in successfully.",
+            "AUTH-013": "Logged out successfully.",
+            "AUTH-014": "User not found.",
+            "AUTH-015": "User is disabled. Please contact the admin.",
+            "AUTH-016": "Authorization token is missing.",
+            "AUTH-017": "Invalid token.",
+            "AUTH-018": "Token revoked."
+        },
+        "background": {
+            "BGTEM-001": "Get data background successfully.",
+            "BGTEM-002": "Get all trip types successfully.",
+            "BGTEM-003": "Invalid id.",
+            "BGTEM-004": "Not found background template with id."
+        },
+        "template": {
+            "TEM-001": "Template created successfully.",
+            "TEM-002": "Get suggest successfully.",
+            "TEM-003": "Template and Pack retrieved successfully.",
+            "TEM-004": "Pack updated successfully.",
+            "TEM-005": "Template not found.",
+            "TEM-006": "Pack not found for the given template.",
+            "TEM-007": "packId is required.",
+            "TEM-008": "packItems must be a non-empty array.",
+            "TEM-009": "Each pack item must have a valid name.",
+            "TEM-010": "Each pack item must have a valid isCheck value (boolean).",
+            "TEM-011": "templateId is required.",
+            "TEM-012": "Template not found.",
+            "TEM-013": "Pack not found.",
+            "TEM-014": "Category not found for the given categoryId.",
+            "TEM-015": "Template not found or unauthorized.",
+            "TEM-016": "Missing required fields.",
+            "TEM-017": "members must be bigger than 0.",
+            "TEM-018": "Budget must be greater than 0.",
+            "TEM-019": "Departure date must be in the format mm/dd/yyyy.",
+            "TEM-020": "Return date must be in the format mm/dd/yyyy.",
+            "TEM-021": "Departure date must be in the future.",
+            "TEM-022": "Return date must be greater than or equal to departure date.",
+            "TEM-023": "Duplicate emails found in listMembers.",
+            "TEM-024": "Invalid email."
+        },
+        "user": {
+            "USER-001": "Maximum 3 social network links allowed.",
+            "USER-002": "Invalid social network link.",
+            "USER-003": "User updated successfully.",
+            "USER-004": "User retrieved successfully.",
+            "USER-005": "User information retrieved successfully.",
+            "USER-006": "Avatar updated successfully.",
+            "USER-007": "Please choose an image."
+        }
+    }
+}

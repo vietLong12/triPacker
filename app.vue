@@ -3,10 +3,7 @@
     <div class="transition-colors duration-500">
       <NuxtLayout />
       <NuxtPage />
-      <button
-        @click="toggleDark"
-        class="fixed bottom-4 right-4 px-4 py-2 bg-primary text-white rounded shadow-lg z-50"
-      >
+      <button @click="toggleDark" class="fixed bottom-4 right-4 px-4 py-2 bg-primary text-white rounded shadow-lg z-50">
         Toggle Dark
       </button>
     </div>
@@ -16,9 +13,9 @@
 <script setup>
 import { ElLoading } from "element-plus";
 import { ref, onMounted, watch } from "vue";
-
+import { useAuthStore } from "./store/authStore";
 const isDark = ref(false);
-
+const authStore = useAuthStore();
 // toggle + update html class
 const toggleDark = () => {
   isDark.value = !isDark.value;
@@ -34,7 +31,8 @@ watch(isDark, (val) => {
 });
 
 // init khi load lại trang
-onMounted(() => {
+onMounted(async () => {
+  await authStore.checkAuth()
   if (isDark.value) {
     document.documentElement.classList.add("dark");
   }

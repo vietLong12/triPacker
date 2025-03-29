@@ -1,0 +1,66 @@
+{
+    "errors": {
+        "auth": {
+            "default": "Có lỗi xảy ra, vui lòng thử lại sau.",
+            "AUTH-001": "Vui lòng cung cấp đầy đủ thông tin: tên, email và mật khẩu.",
+            "AUTH-002": "Tên không được chứa khoảng trắng.",
+            "AUTH-003": "Tài khoản đã được tạo nhưng chưa được xác minh. Vui lòng kiểm tra email của bạn.",
+            "AUTH-004": "Một email xác minh mới đã được gửi.",
+            "AUTH-005": "Tạo tài khoản thành công. Vui lòng kiểm tra email của bạn để xác minh.",
+            "AUTH-006": "Email đã được sử dụng.",
+            "AUTH-007": "Cần nhập cả định danh và mật khẩu.",
+            "AUTH-008": "Định danh hoặc mật khẩu không chính xác.",
+            "AUTH-009": "Tài khoản chưa được xác minh.",
+            "AUTH-010": "Tài khoản đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.",
+            "AUTH-011": "Tài khoản của bạn đã được xác minh thành công!",
+            "AUTH-012": "Đăng nhập thành công.",
+            "AUTH-013": "Đăng xuất thành công.",
+            "AUTH-014": "Không tìm thấy người dùng.",
+            "AUTH-015": "Người dùng đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.",
+            "AUTH-016": "Thiếu mã xác thực.",
+            "AUTH-017": "Mã xác thực không hợp lệ.",
+            "AUTH-018": "Mã xác thực đã bị thu hồi."
+        },
+        "background": {
+            "BGTEM-001": "Lấy dữ liệu nền thành công.",
+            "BGTEM-002": "Lấy tất cả các loại chuyến đi thành công.",
+            "BGTEM-003": "ID không hợp lệ.",
+            "BGTEM-004": "Không tìm thấy mẫu nền với ID đã cho."
+        },
+        "template": {
+            "TEM-001": "Tạo mẫu thành công.",
+            "TEM-002": "Lấy đề xuất thành công.",
+            "TEM-003": "Lấy mẫu và danh sách hành lý thành công.",
+            "TEM-004": "Cập nhật danh sách hành lý thành công.",
+            "TEM-005": "Không tìm thấy mẫu.",
+            "TEM-006": "Không tìm thấy danh sách hành lý cho mẫu đã cho.",
+            "TEM-007": "Cần có packId.",
+            "TEM-008": "packItems phải là một mảng không trống.",
+            "TEM-009": "Mỗi mục trong danh sách hành lý phải có tên hợp lệ.",
+            "TEM-010": "Mỗi mục trong danh sách hành lý phải có giá trị isCheck hợp lệ (boolean).",
+            "TEM-011": "Cần có templateId.",
+            "TEM-012": "Không tìm thấy mẫu.",
+            "TEM-013": "Không tìm thấy danh sách hành lý.",
+            "TEM-014": "Không tìm thấy danh mục cho categoryId đã cho.",
+            "TEM-015": "Không tìm thấy mẫu hoặc không được ủy quyền.",
+            "TEM-016": "Thiếu các trường bắt buộc.",
+            "TEM-017": "Số lượng thành viên phải lớn hơn 0.",
+            "TEM-018": "Ngân sách phải lớn hơn 0.",
+            "TEM-019": "Ngày khởi hành phải có định dạng mm/dd/yyyy.",
+            "TEM-020": "Ngày trở về phải có định dạng mm/dd/yyyy.",
+            "TEM-021": "Ngày khởi hành phải ở tương lai.",
+            "TEM-022": "Ngày trở về phải lớn hơn hoặc bằng ngày khởi hành.",
+            "TEM-023": "Tìm thấy email trùng lặp trong danh sách thành viên.",
+            "TEM-024": "Email không hợp lệ."
+        },
+        "user": {
+            "USER-001": "Chỉ cho phép tối đa 3 liên kết mạng xã hội.",
+            "USER-002": "Liên kết mạng xã hội không hợp lệ.",
+            "USER-003": "Cập nhật người dùng thành công.",
+            "USER-004": "Lấy thông tin người dùng thành công.",
+            "USER-005": "Lấy thông tin người dùng thành công.",
+            "USER-006": "Cập nhật ảnh đại diện thành công.",
+            "USER-007": "Vui lòng chọn một hình ảnh."
+        }
+    }
+}

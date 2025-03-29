@@ -72,10 +72,11 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import authService from "~/services/authService";
 import type { LoginRequest } from "~/types/request";
 import { useAuthStore } from "~/store/authStore";
+import { useI18n } from 'vue-i18n'
 const router = useRouter();
 const loading = ref(false);
 const loginFormRef = ref<FormInstance | null>(null);
-
+const { t } = useI18n()
 const authStore = useAuthStore()
 
 const form = ref<LoginRequest>({
@@ -93,19 +94,19 @@ const handleLogin = async () => {
     if (!loginFormRef.value) return;
 
     await loginFormRef.value.validate(async (valid) => {
-        loading.value = true;
 
         if (valid) {
             try {
+                loading.value = true;
                 const res = await authService.login(form.value)
-                console.log('res: ', res);
                 if (res.status) {
-                    ElMessage.success('Đăng nhập thành công!');
                     authStore.resData = res.data
+                    ElMessage.success(t('Đăng nhập thành công!'));
                     router.push("/");
                 }
             } catch (error) {
-                console.log('error: ', error);
+                const errorCode = error.response?.data?.message || 'default';
+                ElMessage.error(t(`errors.auth.${errorCode}`));
             } finally {
                 loading.value = false;
             }

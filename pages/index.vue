@@ -134,36 +134,25 @@
         Tham khảo và tải về hàng trăm checklist được chia sẻ bởi cộng đồng. Bạn
         cũng có thể đóng góp checklist của mình vào kho chia sẻ!
       </p>
-      <div class="flex justify-center gap-4 flex-wrap">
-        <div class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition">
-          <h4 class="font-semibold text-indigo-600">Template: Du lịch biển</h4>
-          <p class="text-xs text-gray-600">
-            Checklist phù hợp cho các chuyến đi biển vào mùa hè.
+      <div class="flex justify-center gap-6 flex-wrap p-6">
+        <el-card v-for="(template, index) in templates" :key="index"
+          class="w-72 rounded-lg overflow-hidden border border-gray-200 shadow-md transition hover:shadow-lg">
+          <template #header>
+            <el-tag :type="template.color" effect="dark" class="text-sm font-semibold">
+              {{ template.title }}
+            </el-tag>
+          </template>
+
+          <p class="text-gray-600 text-sm leading-relaxed">
+            {{ template.description }}
           </p>
-          <button class="text-sm text-indigo-600 hover:underline">
-            Tải về
-          </button>
-        </div>
-        <div class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition">
-          <h4 class="font-semibold text-indigo-600">
-            Template: Công tác 3 ngày
-          </h4>
-          <p class="text-xs text-gray-600">
-            Checklist đầy đủ cho các chuyến đi công tác ngắn ngày.
-          </p>
-          <button class="text-sm text-indigo-600 hover:underline">
-            Tải về
-          </button>
-        </div>
-        <div class="p-4 border rounded-lg bg-white shadow w-60 space-y-2 hover:shadow-lg transition">
-          <h4 class="font-semibold text-indigo-600">Template: Trekking núi</h4>
-          <p class="text-xs text-gray-600">
-            Đầy đủ các vật dụng cần thiết cho hành trình khám phá thiên nhiên.
-          </p>
-          <button class="text-sm text-indigo-600 hover:underline">
-            Tải về
-          </button>
-        </div>
+
+          <template #footer>
+            <el-button type="primary" plain size="small" class="w-full" :icon="Download">
+              Tải về
+            </el-button>
+          </template>
+        </el-card>
       </div>
       <div class="text-center mt-4">
         <el-button type="primary" size="large">
@@ -328,7 +317,20 @@ import Headers from "../components/Headers.vue";
 import { ChromeFilled } from "@element-plus/icons-vue";
 
 const loadingNavigate = ref(false);
-
+const templates = [
+  {
+    title: "Template: Du lịch biển",
+    description: "Checklist phù hợp cho các chuyến đi biển vào mùa hè.",
+  },
+  {
+    title: "Template: Công tác 3 ngày",
+    description: "Checklist đầy đủ cho các chuyến đi công tác ngắn ngày.",
+  },
+  {
+    title: "Template: Trekking núi",
+    description: "Đầy đủ các vật dụng cần thiết cho hành trình khám phá thiên nhiên.",
+  },
+];
 const faqs = [
   {
     question: "Checklist có lưu lại trên tài khoản không?",
