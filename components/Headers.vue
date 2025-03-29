@@ -52,8 +52,8 @@ const menuItems = [
   { to: "#reviews", label: "Đánh giá" },
   { to: "#faq", label: "FAQ" },
   { to: "#contact", label: "Liên hệ" },
-  { to: "/login", label: "Đăng nhập" },
-  { to: "/register", label: "Đăng ký" },
+  { to: "/auth/login", label: "Đăng nhập" },
+  { to: "/auth/register", label: "Đăng ký" },
 ];
 
 const mobileMenuItems = menuItems.slice(0, 5);

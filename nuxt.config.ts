@@ -10,35 +10,15 @@ export default defineNuxtConfig({
         process.env.NUXT_PUBLIC_API_BASE || "http://localhost:8000/v1/api",
     },
   },
-  pwa: {
-    // ✅ Cấu hình PWA
-    manifest: {
-      name: "TriPacker",
-      short_name: "TriPacker",
-      start_url: "/",
-      display: "standalone",
-      background_color: "#ffffff",
-      theme_color: "#4a90e2",
-      icons: [
-        {
-          src: "/icon-192x192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          src: "/icon-512x512.png",
-          sizes: "512x512",
-          type: "image/png",
-        },
+  app: {
+    head: {
+      title: "TriPacker - Công cụ lập danh sách hành lý",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
       ],
-    },
-    workbox: {
-      runtimeCaching: [
-        {
-          urlPattern: /^https:\/\/api\.yourbackend\.com\//,
-          handler: "NetworkFirst",
-          method: "GET",
-        },
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/logo/tripacker.png" },
       ],
     },
   },

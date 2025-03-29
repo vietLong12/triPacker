@@ -29,7 +29,7 @@ import { SuccessFilled } from "@element-plus/icons-vue";
 
 const router = useRouter();
 const email = history.state.email || "Không có email";
-const countdown = ref(10);
+const countdown = ref(30);
 
 const goToGmail = () => {
     window.open("https://mail.google.com", "_blank");
@@ -41,7 +41,7 @@ onMounted(() => {
             countdown.value--;
         } else {
             clearInterval(timer);
-            router.push("/login"); // Chuyển về trang đăng nhập sau 10s
+            router.push("/auth/login"); // Chuyển về trang đăng nhập sau 10s
         }
     }, 1000);
 });

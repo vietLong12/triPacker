@@ -7,7 +7,7 @@
 
             <el-form ref="registerFormRef" :model="form" :rules="rules" @submit.prevent="handleRegister">
                 <el-form-item prop="fullName">
-                    <el-input v-model="form.fullName" placeholder="Họ và tên" clearable>
+                    <el-input v-model="form.name" placeholder="Tên người dùng" clearable>
                         <template #prefix>
                             <el-icon>
                                 <User />
@@ -47,14 +47,14 @@
                     </el-input>
                 </el-form-item>
 
-                <el-form-item>
+                <el-form-item prop="terms">
                     <el-checkbox v-model="form.terms">
                         Tôi đồng ý với <router-link to="/terms" class="text-blue-500 hover:underline">điều khoản sử
                             dụng</router-link>
                     </el-checkbox>
                 </el-form-item>
 
-                <el-button type="primary" class="w-full" :loading="loading" native-type="submit">
+                <el-button type="primary" class="w-full mt-2" :loading="loading" native-type="submit">
                     Đăng ký
                 </el-button>
             </el-form>
@@ -63,7 +63,7 @@
 
             <div class="text-center mt-6 text-sm">
                 <p>Đã có tài khoản?
-                    <router-link to="/login" class="text-red-500 hover:underline">Đăng nhập ngay!</router-link>
+                    <router-link to="/auth/login" class="text-red-500 hover:underline">Đăng nhập ngay!</router-link>
                 </p>
             </div>
         </el-card>
@@ -78,13 +78,15 @@ import { User, Lock } from "@element-plus/icons-vue";
 import type { FormInstance } from "element-plus";
 import { mdiFacebook, mdiGoogle } from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
+import authService from "~/services/authService";
+import type { RegisterRequest } from "~/types/request";
 
 const router = useRouter();
 const loading = ref(false);
 const registerFormRef = ref<FormInstance | null>(null);
 
-const form = ref({
-    fullName: "",
+const form = ref<RegisterRequest>({
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -92,13 +94,33 @@ const form = ref({
 });
 
 const rules = {
-    fullName: [{ required: true, message: "Vui lòng nhập họ và tên", trigger: "blur" }],
-    email: [{ required: true, type: "email", message: "Vui lòng nhập email hợp lệ", trigger: "blur" }],
+    name: [
+        { required: true, message: "Vui lòng nhập tên người dùng", trigger: "blur" },
+        {
+            validator: (rule: any, value: string, callback: Function) => {
+                if (!/^[a-zA-Z][a-zA-Z0-9._]{2,19}$/.test(value)) {
+                    callback(
+                        new Error("Tên người dùng phải bắt đầu bằng chữ cái, từ 3-20 ký tự, chỉ chứa chữ, số, _ hoặc .")
+                    );
+                } else if (/[_\.]{2,}/.test(value)) {
+                    callback(new Error("Tên người dùng không được chứa dấu _ hoặc . liên tiếp"));
+                } else if (/[_.]$/.test(value)) {
+                    callback(new Error("Tên người dùng không được kết thúc bằng _ hoặc ."));
+                } else {
+                    callback();
+                }
+            },
+            trigger: "blur"
+        }
+    ], email: [{ required: true, type: "email", message: "Vui lòng nhập email hợp lệ", trigger: "blur" }],
     password: [{ required: true, message: "Vui lòng nhập mật khẩu", trigger: "blur" }],
     confirmPassword: [
         { required: true, message: "Vui lòng nhập lại mật khẩu", trigger: "blur" },
         {
             validator: (rule: any, value: string, callback: Function) => {
+                if (value.length < 6 || value.length > 15) {
+                    callback(new Error("Mật khẩu phải từ 6 đến 15 ký tự"));
+                }
                 if (value !== form.value.password) {
                     callback(new Error("Mật khẩu không khớp"));
                 } else {
@@ -108,25 +130,34 @@ const rules = {
         }
     ],
     terms: [{
-        required: true, validator: (_, value, callback) => {
-            if (!value) callback(new Error("Bạn phải đồng ý với điều khoản"));
-            else callback();
-        }, trigger: "change"
+        validator: (_, value) => {
+            return value ? Promise.resolve() : Promise.reject("Bạn phải đồng ý với điều khoản");
+        },
+        trigger: "change"
     }],
 };
 
-const handleRegister = () => {
+const handleRegister = async () => {
     if (!registerFormRef.value) return;
 
-    registerFormRef.value.validate((valid) => {
+    await registerFormRef.value.validate(async (valid) => {
         if (valid) {
             loading.value = true;
-            setTimeout(() => {
+            try {
+                const res = await authService.register(form.value)
+                console.log('res: ', res);
+                if (res.success) {
+                    ElMessage.success("Đăng ký thành công!");
+                    router.push({ path: "/auth/process", state: { email: form.value.email } });
+                } else {
+                    ElMessage.error(res.message);
+                }
+            } catch (error) {
+                console.log('error: ', error);
+            }
+            finally {
                 loading.value = false;
-                ElMessage.success("Đăng ký thành công!");
-                console.log(form.value);
-                router.push({ path: "/process", state: { email: form.value.email } });
-            }, 1500);
+            }
         }
     });
 };

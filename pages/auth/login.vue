@@ -6,8 +6,8 @@
             </h2>
 
             <el-form ref="loginFormRef" :model="form" :rules="rules" @submit.prevent="handleLogin">
-                <el-form-item prop="username">
-                    <el-input v-model="form.email" placeholder="Email" clearable>
+                <el-form-item prop="identifier">
+                    <el-input v-model="form.identifier" placeholder="Tên tài khoản hoặc email" clearable>
                         <template #prefix>
                             <el-icon>
                                 <User />
@@ -54,9 +54,8 @@
 
             <div class="text-center mt-6 text-sm">
                 <p>Bạn không có tài khoản?
-                    <router-link to="/register" class="text-red-500 hover:underline">Đăng ký ngay!</router-link>
+                    <router-link to="/auth/register" class="text-red-500 hover:underline">Đăng ký ngay!</router-link>
                 </p>
-                <el-button class="w-full mt-2 register-btn">REGISTER</el-button>
             </div>
         </el-card>
     </div>
@@ -70,32 +69,46 @@ import { User, Lock } from "@element-plus/icons-vue";
 import type { FormInstance } from "element-plus";
 import { mdiFacebook, mdiGoogle } from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
+import authService from "~/services/authService";
+import type { LoginRequest } from "~/types/request";
+import { useAuthStore } from "~/store/authStore";
 const router = useRouter();
 const loading = ref(false);
 const loginFormRef = ref<FormInstance | null>(null);
 
-const form = ref({
-    email: "",
+const authStore = useAuthStore()
+
+const form = ref<LoginRequest>({
+    identifier: "",
     password: "",
     remember: false,
 });
 
 const rules = {
-    username: [{ required: true, message: "Vui lòng nhập email", trigger: "blur" }],
+    identifier: [{ required: true, message: "Vui lòng nhập tên tài khoản hoặc email", trigger: "blur" }],
     password: [{ required: true, message: "Vui lòng nhập mật khẩu", trigger: "blur" }],
 };
 
-const handleLogin = () => {
+const handleLogin = async () => {
     if (!loginFormRef.value) return;
 
-    loginFormRef.value.validate((valid) => {
+    await loginFormRef.value.validate(async (valid) => {
+        loading.value = true;
+
         if (valid) {
-            loading.value = true;
-            setTimeout(() => {
+            try {
+                const res = await authService.login(form.value)
+                console.log('res: ', res);
+                if (res.status) {
+                    ElMessage.success('Đăng nhập thành công!');
+                    authStore.resData = res.data
+                    router.push("/");
+                }
+            } catch (error) {
+                console.log('error: ', error);
+            } finally {
                 loading.value = false;
-                ElMessage.success("Đăng nhập thành công!");
-                console.log(form.value)
-            }, 1500);
+            }
         }
     });
 };
