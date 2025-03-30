@@ -320,6 +320,9 @@ function getAddressFromCoords(lat, lon) {
     .catch((error) => console.error("❌ Lỗi khi lấy địa chỉ:", error));
 }
 
+definePageMeta({
+  middleware: 'auth',
+});
 
 </script>
 

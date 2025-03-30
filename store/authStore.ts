@@ -7,7 +7,7 @@ export const useAuthStore = defineStore("authStore", {
     isLogged: false,
   }),
   actions: {
-    async checkAuth() {
+    async checkAuth(notice: string) {
       try {
         const { $api } = useNuxtApp(); // Lấy API từ NuxtApp
         const response = await $api.get("/user/me");
@@ -20,8 +20,13 @@ export const useAuthStore = defineStore("authStore", {
           this.isLogged = false;
         }
       } catch (error) {
-        this.isLogged = false; // Đảm bảo cập nhật trạng thái
-        ElMessage.error("Bạn chưa đăng nhập hoặc phiên đăng nhập đã hết hạn.");
+        this.isLogged = false;
+        console.log("notice: ", notice);
+        if (notice !== "noNotice") {
+          ElMessage.error(
+            "Bạn chưa đăng nhập hoặc phiên đăng nhập đã hết hạn."
+          );
+        }
       }
     },
     async getInformation() {
@@ -29,11 +34,28 @@ export const useAuthStore = defineStore("authStore", {
         const { $api } = useNuxtApp(); // Lấy API từ NuxtApp
         const response = await $api.get("/user/userInformation");
         console.log("response: ", response);
-
-        
       } catch (error) {
-        console.log('error: ', error);
+        console.log("error: ", error);
         ElMessage.error("Bạn chưa đăng nhập hoặc phiên đăng nhập đã hết hạn.");
+      }
+    },
+    async logout() {
+      try {
+        const { $api } = useNuxtApp(); // Lấy API từ NuxtApp
+        const response = await $api.post("/auth/logout");
+        console.log("response: ", response);
+        if (response.status === 200) {
+          this.isLogged = false;
+          ElMessage.success("Đăng xuất thành công.");
+          return true;
+        } else {
+          ElMessage.error("Đăng xuất không thành công.");
+          return false;
+        }
+      } catch (error) {
+        console.log("error: ", error);
+        ElMessage.error("Đăng xuất không thành công.");
+        return false;
       }
     },
   },

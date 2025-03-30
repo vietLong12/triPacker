@@ -5,8 +5,16 @@
       <h3 class="text-xl font-semibold">Kiểu chuyến đi</h3>
       <el-form-item prop="tripType">
         <el-select v-model="form.tripType" placeholder="Chọn kiểu chuyến đi" class="w-full">
-          <el-option v-for="trip in listTypeTrip" :key="trip._id" :label="trip.name" :value="trip.name" />
+          <el-option v-for="trip in listTypeTrip" :key="trip._id" :label="trip.name" :value="trip._id" />
         </el-select>
+      </el-form-item>
+
+      <el-form-item prop="description" label="Tên chuyến đi">
+        <el-input v-model="form.title" placeholder="Ví dụ: Vi vu cùng TriPacker" />
+      </el-form-item>
+      <el-form-item prop="description" label="Mô tả chuyến đi">
+        <el-input v-model="form.description" type="textarea" rows="3"
+          placeholder="Mô tả ngắn gọn về chuyến đi này..." />
       </el-form-item>
 
     </div>
@@ -45,7 +53,7 @@
         <el-col :span="12">
           <el-form-item label="Số người tham gia" prop="people">
             <el-tooltip content="Tổng số người trong chuyến đi" placement="top">
-              <el-input-number v-model="form.people" :min="1" placeholder="Ví dụ: 4" class="!w-full"
+              <el-input-number v-model="form.members" :min="1" placeholder="Ví dụ: 4" class="!w-full"
                 controls-position="right" :controls="false" />
             </el-tooltip>
           </el-form-item>
@@ -55,7 +63,7 @@
             <template #label>
               <div class="flex items-center justify-between w-full">
                 <span class="mr-2">Ngân sách mỗi người (VNĐ)</span>
-                <span v-if="form.people && form.budgetPerPerson" class="text-xs text-gray-500 font-normal">
+                <span v-if="form.members && form.budget" class="text-xs text-gray-500 font-normal">
                   Tổng: {{ totalBudget }} VNĐ
                 </span>
               </div>
@@ -74,7 +82,7 @@
     <!-- Block 3: Thành viên nhóm -->
     <div class="space-y-4">
       <h3 class="text-xl font-semibold">Thành viên nhóm (tùy chọn)</h3>
-      <div v-for="(member, index) in form.members" :key="index" class="border p-4 rounded-lg relative">
+      <div v-for="(member, index) in form.listMembers" :key="index" class="border p-4 rounded-lg relative">
         <el-row :gutter="20" class="items-center">
           <el-col :span="11">
             <el-form-item :label="`Thành viên ${index + 1} - Tên: ${member.name}`" class="mb-0">
@@ -99,7 +107,7 @@
     <el-collapse v-model="activeCollapse" @change="handleCollapseChange">
       <el-collapse-item name="advanced" title="Tùy chọn nâng cao">
         <el-form-item label="Loại phương tiện di chuyển">
-          <el-select v-model="form.vehicle" placeholder="Chọn loại phương tiện di chuyển" class="w-full">
+          <el-select v-model="form.vihicle" placeholder="Chọn loại phương tiện di chuyển" class="w-full">
             <el-option v-for="(vehicle, index) in vehicleOptions" :key="index" :label="vehicle" :value="vehicle" />
           </el-select>
         </el-form-item>
@@ -113,7 +121,6 @@
 
     <!-- Block 6: Checkbox + Button -->
     <div class="!mt-0">
-      <el-checkbox v-model="form.saveTemplate">Lưu lại template</el-checkbox>
       <el-button type="primary" class="w-full mt-2" @click="submitForm(formRef)" :loading="loadingContinue">Tiếp
         tục</el-button>
     </div>
@@ -128,6 +135,7 @@ import { ElMessage } from "element-plus";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import type { TypeTrip } from "~/types/response";
 import type { PropType } from "vue"; // Import PropType để hỗ trợ TypeScript
+import type { TemplateTrip } from "~/types/request";
 
 interface Member {
   name: string;
@@ -140,6 +148,10 @@ const props = defineProps({
     type: Array as PropType<TypeTrip[]>,
     default: () => [],
   },
+  backgroundId: {
+    type: String,
+    default: "",
+  }
 });
 
 const router = useRouter();
@@ -147,17 +159,19 @@ const emit = defineEmits(["update:tripType"]);
 const formRef = ref<FormInstance | null>(null);
 const activeCollapse = ref<string[]>([]);
 
-const form = ref({
+const form = ref<TemplateTrip>({
   tripType: "Du Lịch",
   destination: "",
   startDate: "",
   endDate: "",
-  people: 1,
-  budgetPerPerson: 0,
-  members: [] as Member[],
+  members: 1,
+  budget: 0,
+  listMembers: [],
   healthNotes: "",
-  saveTemplate: true,
-  vehicle: "Ô tô",
+  vihicle: "Ô tô",
+  description: "",
+  background: "",
+  title: "",
 });
 const loadingContinue = ref(false)
 
@@ -182,10 +196,14 @@ const rules = {
 };
 
 const addMember = () => {
-  form.value.members.push({ name: "", email: "" });
+  if (form.value.listMembers.length >= form.value.members) {
+    ElMessage.warning("Đã đủ số lượng thành viên trong nhóm");
+    return;
+  }
+  form.value.listMembers.push({ name: "", email: "" });
 };
 const removeMember = (index: number) => {
-  form.value.members.splice(index, 1);
+  form.value.listMembers.splice(index, 1);
 };
 const handleCollapseChange = () => {
   setTimeout(() => {
@@ -207,20 +225,20 @@ const tripDuration = computed(() => {
 
 const formattedBudgetPerPerson = computed({
   get() {
-    return form.value.budgetPerPerson
-      ? form.value.budgetPerPerson
+    return form.value.budget
+      ? form.value.budget
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
       : "";
   },
   set(val: string) {
-    form.value.budgetPerPerson = Number(val.replace(/[^\d]/g, ""));
+    form.value.budget = Number(val.replace(/[^\d]/g, ""));
   },
 });
 
 const totalBudget = computed(() => {
-  return form.value.people
-    ? Math.round(form.value.people * form.value.budgetPerPerson).toLocaleString(
+  return form.value.members
+    ? Math.round(form.value.members * Number(form.value.budget)).toLocaleString(
       "vi-VN"
     )
     : "0";
@@ -241,6 +259,7 @@ const submitForm = async (formEl: FormInstance | null) => {
     if (valid) {
       loadingContinue.value = true;
       console.log("submit!", form.value);
+      console.log("bg!", props.backgroundId);
     } else {
       ElMessage.warning(fields?.destination[0].message)
       console.log("error submit!", fields);
@@ -252,11 +271,6 @@ const submitForm = async (formEl: FormInstance | null) => {
 };
 </script>
 <style>
-.form-create .el-input__inner,
-.form-create .el-textarea__inner {
-  @apply bg-transparent;
-}
-
 .form-create .el-collapse-item__header {
   @apply bg-transparent text-xl font-semibold;
 }

@@ -59,6 +59,10 @@
   import { ref } from 'vue'
   
   const showPreview = ref(false)
+
+  definePageMeta({
+  middleware: 'auth',
+});
   </script>
   
   <style scoped>

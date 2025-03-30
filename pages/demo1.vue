@@ -5,25 +5,15 @@
     <!-- Travel Summary -->
     <!-- Travel Summary Improved -->
     <!-- Travel Summary Full -->
-    <div
-      class="border rounded-xl p-6 shadow-md bg-gradient-to-br from-indigo-50 to-white space-y-6"
-    >
+    <div class="border rounded-xl p-6 shadow-md bg-gradient-to-br from-indigo-50 to-white space-y-6">
       <!-- Header -->
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="bg-indigo-500 text-white rounded-full p-2">
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17 20h5v-2a3 3 0 00-3-3h-4a3 3 0 00-3 3v2h5zM9 20H4v-2a3 3 0 013-3h4a3 3 0 013 3v2H9zM16 3.13a4 4 0 11-8 0 4 4 0 018 0zM20 8v6m0 0a4 4 0 01-4 4H8a4 4 0 01-4-4V8"
-              ></path>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M17 20h5v-2a3 3 0 00-3-3h-4a3 3 0 00-3 3v2h5zM9 20H4v-2a3 3 0 013-3h4a3 3 0 013 3v2H9zM16 3.13a4 4 0 11-8 0 4 4 0 018 0zM20 8v6m0 0a4 4 0 01-4 4H8a4 4 0 01-4-4V8">
+              </path>
             </svg>
           </div>
           <div>
@@ -34,9 +24,7 @@
             </p>
           </div>
         </div>
-        <button
-          class="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 text-sm"
-        >
+        <button class="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 text-sm">
           Sửa
         </button>
       </div>
@@ -71,15 +59,9 @@
           👤 Chi phí từng thành viên:
         </h3>
         <div class="space-y-1">
-          <div
-            v-for="member in members"
-            :key="member.name"
-            class="flex justify-between text-sm"
-          >
+          <div v-for="member in members" :key="member.name" class="flex justify-between text-sm">
             <span class="text-gray-700">{{ member.name }}</span>
-            <span class="text-indigo-600 font-medium"
-              >{{ member.cost.toLocaleString() }} VNĐ</span
-            >
+            <span class="text-indigo-600 font-medium">{{ member.cost.toLocaleString() }} VNĐ</span>
           </div>
         </div>
       </div>
@@ -88,39 +70,25 @@
     <!-- Grid Layout -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <!-- Add Activity Form -->
-      <div
-        class="md:col-span-1 space-y-4 border rounded-lg p-4 shadow-sm bg-gradient-to-b from-indigo-50 to-white"
-      >
+      <div class="md:col-span-1 space-y-4 border rounded-lg p-4 shadow-sm bg-gradient-to-b from-indigo-50 to-white">
         <h2 class="font-semibold text-lg text-gray-700 flex items-center gap-2">
           ➕ Thêm hoạt động
         </h2>
         <div class="space-y-3">
           <div>
-            <label class="block text-sm font-medium text-gray-600 mb-1"
-              >Ngày</label
-            >
+            <label class="block text-sm font-medium text-gray-600 mb-1">Ngày</label>
             <input type="date" class="input" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-600 mb-1"
-              >Tên hoạt động</label
-            >
-            <input
-              type="text"
-              placeholder="Ví dụ: Tham quan bảo tàng"
-              class="input"
-            />
+            <label class="block text-sm font-medium text-gray-600 mb-1">Tên hoạt động</label>
+            <input type="text" placeholder="Ví dụ: Tham quan bảo tàng" class="input" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-600 mb-1"
-              >Thời gian</label
-            >
+            <label class="block text-sm font-medium text-gray-600 mb-1">Thời gian</label>
             <input type="time" class="input" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-600 mb-1"
-              >Loại hoạt động</label
-            >
+            <label class="block text-sm font-medium text-gray-600 mb-1">Loại hoạt động</label>
             <select class="input">
               <option value="explore">🗺️ Tham quan</option>
               <option value="food">🍽️ Ăn uống</option>
@@ -134,9 +102,7 @@
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-600 mb-1"
-              >Chi phí (VNĐ)</label
-            >
+            <label class="block text-sm font-medium text-gray-600 mb-1">Chi phí (VNĐ)</label>
             <input type="number" placeholder="Ví dụ: 300000" class="input" />
           </div>
           <button class="btn-primary w-full">➕ Thêm vào lịch</button>
@@ -154,20 +120,14 @@
             <h3 class="text-indigo-600 font-semibold">
               {{ day.date }} - {{ day.day }}
             </h3>
-            <span class="text-sm text-gray-600"
-              >Tổng chi phí: {{ calculateDayTotal(day.activities) }} VNĐ</span
-            >
+            <span class="text-sm text-gray-600">Tổng chi phí: {{ calculateDayTotal(day.activities) }} VNĐ</span>
           </div>
 
           <div class="space-y-2">
-            <div
-              v-for="activity in day.activities"
-              :key="activity.name"
-              :class="[
-                'flex items-center justify-between rounded-lg p-3 shadow-sm',
-                activity.bg,
-              ]"
-            >
+            <div v-for="activity in day.activities" :key="activity.name" :class="[
+              'flex items-center justify-between rounded-lg p-3 shadow-sm',
+              activity.bg,
+            ]">
               <div class="flex items-center gap-3">
                 <span class="text-xl">{{ activity.icon }}</span>
                 <div>
@@ -181,14 +141,10 @@
                 </div>
               </div>
               <div class="flex gap-2">
-                <button
-                  class="text-sm px-2 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500"
-                >
+                <button class="text-sm px-2 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500">
                   Sửa
                 </button>
-                <button
-                  class="text-sm px-2 py-1 bg-rose-500 text-white rounded hover:bg-rose-600"
-                >
+                <button class="text-sm px-2 py-1 bg-rose-500 text-white rounded hover:bg-rose-600">
                   Xóa
                 </button>
               </div>
@@ -282,12 +238,18 @@ const totalCost = itinerary.reduce(
   (sum, day) => sum + calculateDayTotal(day.activities),
   0
 );
+
+definePageMeta({
+  middleware: 'auth',
+});
+
 </script>
 
 <style scoped>
 .input {
   @apply w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400;
 }
+
 .btn-primary {
   @apply py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition block text-center;
 }

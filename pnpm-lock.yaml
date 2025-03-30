@@ -38,6 +38,9 @@ importers:
       axios:
         specifier: ^1.8.4
         version: 1.8.4
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
       nuxt:
         specifier: ^3.16.1
         version: 3.16.1(@parcel/watcher@2.5.1)(@types/node@22.13.13)(db0@0.3.1)(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.37.0)(sass@1.86.0)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.2(@types/node@22.13.13)(jiti@2.4.2)(sass@1.86.0)(terser@5.39.0)(yaml@2.7.0))(xml2js@0.6.2)(yaml@2.7.0)

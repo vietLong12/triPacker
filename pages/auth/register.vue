@@ -83,6 +83,7 @@ import type { RegisterRequest } from "~/types/request";
 
 const router = useRouter();
 const loading = ref(false);
+const { t } = useI18n()
 const registerFormRef = ref<FormInstance | null>(null);
 
 const form = ref<RegisterRequest>({
@@ -140,20 +141,22 @@ const rules = {
 const handleRegister = async () => {
     if (!registerFormRef.value) return;
 
-    await registerFormRef.value.validate(async (valid) => {
+    await registerFormRef.value.validate(async (valid: any) => {
         if (valid) {
             loading.value = true;
             try {
                 const res = await authService.register(form.value)
-                console.log('res: ', res);
-                if (res.success) {
-                    ElMessage.success("Đăng ký thành công!");
+                if (res.status) {
+                    const code = res.message;
+                    ElMessage.success(t(`errors.auth.${code}`));
                     router.push({ path: "/auth/process", state: { email: form.value.email } });
                 } else {
                     ElMessage.error(res.message);
                 }
-            } catch (error) {
-                console.log('error: ', error);
+            } catch (error: any) {
+                const errorCode = error.response?.data?.message || 'default';
+                console.log('errorCode: ', errorCode);
+                ElMessage.error(t(`errors.auth.${errorCode}`));
             }
             finally {
                 loading.value = false;

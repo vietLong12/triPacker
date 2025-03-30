@@ -8,7 +8,6 @@ export default {
       const response = await $api.post("/auth/register", body);
       return response.data;
     } catch (error: any) {
-      ElMessage.error(error.response.data.message);
       throw error;
     }
   },
@@ -18,7 +17,6 @@ export default {
       const response = await $api.post("/auth/login", body);
       return response.data;
     } catch (error: any) {
-      ElMessage.error(error.response.data.message);
       throw error;
     }
   },

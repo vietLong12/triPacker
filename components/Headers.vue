@@ -85,7 +85,6 @@
       </nav>
 
     </el-drawer>
-    {{ isLogged }}
   </div>
 </template>
 
@@ -128,7 +127,7 @@ const goToSettings = () => {
 
 // Xử lý đăng xuất
 const logout = () => {
-  authStore.isLogged = false; // Cập nhật trạng thái đăng nhập
-  router.push("/auth/login"); // Điều hướng về trang đăng nhập
+  authStore.logout();
+  router.push("/"); // Điều hướng về trang đăng nhập
 };
 </script>

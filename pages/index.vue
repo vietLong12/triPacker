@@ -353,6 +353,7 @@ const handleStart = () => {
   loadingNavigate.value = true;
   setTimeout(() => {
     navigateTo("/step1");
+    loadingNavigate.value = false;
   }, 1000);
 };
 </script>

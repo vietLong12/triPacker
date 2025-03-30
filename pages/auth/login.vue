@@ -102,6 +102,7 @@ const handleLogin = async () => {
                 if (res.status) {
                     authStore.resData = res.data
                     ElMessage.success(t('Đăng nhập thành công!'));
+                    await authStore.checkAuth()
                     router.push("/");
                 }
             } catch (error) {

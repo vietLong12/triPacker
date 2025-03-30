@@ -32,7 +32,7 @@ watch(isDark, (val) => {
 
 // init khi load lại trang
 onMounted(async () => {
-  await authStore.checkAuth()
+  await authStore.checkAuth('noNotice')
   if (isDark.value) {
     document.documentElement.classList.add("dark");
   }
