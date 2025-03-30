@@ -242,6 +242,7 @@ onMounted(() => {
   console.log("appStore", appStore.bgImage);
 });
 
+const state = history.state || {};
 const appStore = useAppStore();
 const dialogGroupRef = ref(null);
 const categories = [
@@ -319,6 +320,10 @@ function getAddressFromCoords(lat, lon) {
     })
     .catch((error) => console.error("❌ Lỗi khi lấy địa chỉ:", error));
 }
+
+onMounted(() => {
+  console.log('state: ', state);
+})
 
 definePageMeta({
   middleware: 'auth',

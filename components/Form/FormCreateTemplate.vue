@@ -131,11 +131,12 @@
 import { Delete, InfoFilled, Plus } from "@element-plus/icons-vue";
 import { ref, computed, watch } from "vue";
 import { useRouter } from "vue-router";
-import { ElMessage } from "element-plus";
+import { dayjs, ElMessage } from "element-plus";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import type { TypeTrip } from "~/types/response";
 import type { PropType } from "vue"; // Import PropType để hỗ trợ TypeScript
 import type { TemplateTrip } from "~/types/request";
+import templateService from "~/services/templateService";
 
 interface Member {
   name: string;
@@ -158,9 +159,10 @@ const router = useRouter();
 const emit = defineEmits(["update:tripType"]);
 const formRef = ref<FormInstance | null>(null);
 const activeCollapse = ref<string[]>([]);
+const { t } = useI18n()
 
 const form = ref<TemplateTrip>({
-  tripType: "Du Lịch",
+  tripType: "",
   destination: "",
   startDate: "",
   endDate: "",
@@ -245,6 +247,16 @@ const totalBudget = computed(() => {
 });
 
 watch(
+  () => props.listTypeTrip,
+  (newList) => {
+    if (newList.length > 0 && !form.value.tripType) {
+      form.value.tripType = newList[0]._id;
+    }
+  },
+  { immediate: true, deep: true }
+);
+
+watch(
   () => form.value.tripType,
   (newValue) => {
     emit("update:tripType", newValue);
@@ -255,11 +267,28 @@ watch(
 
 const submitForm = async (formEl: FormInstance | null) => {
   if (!formEl) return;
-  await formEl.validate((valid, fields) => {
+  await formEl.validate(async (valid, fields) => {
     if (valid) {
       loadingContinue.value = true;
-      console.log("submit!", form.value);
-      console.log("bg!", props.backgroundId);
+      const bodyData: TemplateTrip = {
+        ...form.value,
+        startDate: dayjs(form.value.startDate).format("MM/DD/YYYY"),
+        endDate: dayjs(form.value.endDate).format("MM/DD/YYYY"),
+        background: props.backgroundId,
+        budget: Number(form.value.budget) * form.value.members
+      }
+      try {
+        const res = await templateService.createTemplateTrip(bodyData)
+        console.log('res: ', res);
+        if (res) {
+          ElMessage.success(t(`errors.template.${res?.message}`));
+          router.push({
+            path: '/step2', state: { data: res.data }
+          })
+        }
+      } catch (error: any) {
+        ElMessage.error(t(`errors.template.${error.response?.data?.message}`));
+      }
     } else {
       ElMessage.warning(fields?.destination[0].message)
       console.log("error submit!", fields);

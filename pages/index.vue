@@ -315,6 +315,7 @@
 import { ElLoading } from "element-plus";
 import Headers from "../components/Headers.vue";
 import { ChromeFilled } from "@element-plus/icons-vue";
+import { Download } from "@element-plus/icons-vue";
 
 const loadingNavigate = ref(false);
 const templates = [

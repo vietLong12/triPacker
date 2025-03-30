@@ -30,7 +30,7 @@
                     <el-checkbox v-model="form.remember">Ghi nhớ tôi</el-checkbox>
                 </el-form-item>
                 <el-form-item>
-                    <router-link to="/forgot-password" class="text-sm !block text-blue-500 float-right hover:underline">
+                    <router-link to="/auth/forgot-password" class="text-sm !block text-blue-500 float-right hover:underline">
                         Quên mật khẩu?
                     </router-link>
                 </el-form-item>
